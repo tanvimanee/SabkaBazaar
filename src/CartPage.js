@@ -1,14 +1,17 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartPage = ({ cartItems, removeFromCart, total }) => {
   const cartItemIds = Object.keys(cartItems);
+  
 
   return (
     <div className="cart-page">
       <h1 className='cart-heading'>Shopping Cart</h1>
       {cartItemIds.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
+        <p>Cart empty!</p>
+      ) : ( 
         <>
           <div className="cart-items">
             {cartItemIds.map((itemId) => {
@@ -21,6 +24,7 @@ const CartPage = ({ cartItems, removeFromCart, total }) => {
                     <p>Price: ${item.price}</p>
                     <p>Quantity: {item.quantity}</p>
                     <button onClick={() => removeFromCart(item)}>Remove</button>
+                    <ToastContainer />
                   </div>
                 </div>
               );

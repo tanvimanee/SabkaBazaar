@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const HomePage = ({ products, addToCart }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -9,7 +12,7 @@ const HomePage = ({ products, addToCart }) => {
   useEffect(() => {
     // Filter products based on the selected category
     if (searchCategory.trim() !== '') {
-      // Split search term into individual words
+      // Split search term into individual words 
       const searchTerms = searchCategory.toLowerCase().split(/\s+/);
 
       // Filter products based on search terms
@@ -46,6 +49,7 @@ const HomePage = ({ products, addToCart }) => {
     }
     setCurrentPage(1); // Reset current page to 1 after search
   };
+  
 
   // Function to handle previous page
   const handlePreviousPage = () => {
@@ -64,11 +68,11 @@ const HomePage = ({ products, addToCart }) => {
 
   return (
     <div className="homepage">
-      <h1 className='heading'>Welcome to E-commerce Store</h1>
+      <h1 className='head'>Welcome to E-commerce Store</h1>
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search by category..."
+          placeholder=""
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
         />
@@ -81,10 +85,16 @@ const HomePage = ({ products, addToCart }) => {
             <h3>{product.title}</h3>
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+            <button onClick={() => addToCart(product) }>Add to Cart</button>
+            <ToastContainer />
           </div>
+          
         ))}
       </div>
+      
+      
+
+
       <div className="pagination">
         <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
         {Array.from({ length: Math.ceil(filteredProducts.length / itemsPerPage) }, (_, i) => i + 1).map((pageNumber) => (
